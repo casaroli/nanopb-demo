@@ -31,6 +31,7 @@ bool read_value(pb_istream_t *stream, const pb_field_iter_t *field, void **arg)
 
     if (!pb_read(stream, buf, stream->bytes_left)) {
         printf("ERR pb read\n");
+        free(buf);
         return false;
     }
 
@@ -56,6 +57,7 @@ int main(void) {
     uint8_t *buffer;
     size_t message_length;
     bool status;
+    int ret = 0;
 
     /* Allocate space on the stack to store the message data. */
 
@@ -92,7 +94,8 @@ int main(void) {
         if (!status)
         {
             printf("Encoding failed: %s\n", PB_GET_ERROR(&stream));
-            return 1;
+            ret = 1;
+            goto end;
         }
     }
 
@@ -118,7 +121,8 @@ int main(void) {
         if (!status)
         {
             printf("Decoding failed: %s\n", PB_GET_ERROR(&stream));
-            return 1;
+            ret = 1;
+            goto end;
         }
         
         /* Print the data contained in the message. */
@@ -127,6 +131,6 @@ int main(void) {
         free(msgvalue);
     }
 
+end:
     free(buffer);
-
 }
