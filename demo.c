@@ -81,8 +81,8 @@ int main(void) {
         /* Create a stream that will write to our buffer. */
         pb_ostream_t stream = pb_ostream_from_buffer(buffer, BUF_LEN);
         
-        /* Fill in the lucky number */
-        strcpy(message.key, "zirigdum1");
+        /* Fill in the string */
+        memcpy(message.key, "zirigdum1", 10);
 
         message.value.funcs.encode = write_value;
         
