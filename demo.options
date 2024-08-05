@@ -1,0 +1,4 @@
+# Limit the key size to demo the simplified non callback interface
+# The callback interface is still used for the value
+
+MessageRequest.key max_size:128
