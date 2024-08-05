@@ -133,4 +133,5 @@ int main(void) {
 
 end:
     free(buffer);
+    return ret;
 }
